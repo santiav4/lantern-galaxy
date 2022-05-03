@@ -1,0 +1,75 @@
+<h1>{{section.settings.heading}}</h1>
+
+{% comment %} {% for block in section.blocks %}
+  {% if block.type == "QA" %}
+    <h3>{{block.settings.question}}</h3>
+    <p>{{block.settings.answer}}</p>
+  {% elsif block.type == "headline" %}
+    <h1>{{block.settings.title}}</h1>
+  {% endif %}
+{% endfor %} {% endcomment %}
+
+<div class="faq">
+{% for block in section.blocks %}
+  {% if block.type == "QA" %}
+          <div class="question">
+            <input type="checkbox" id="question-{{forloop.index}}" class="question-toggle">
+            <label for="question-{{forloop.index}}" class="question-label">{{block.settings.question}}</label>
+            <div class="answer">{{block.settings.answer}}</div>
+        </div>
+  {% elsif block.type == "headline" %}
+	  <h4>{{block.settings.title}}</h4>
+  {% endif %}
+
+{% endfor %}
+
+
+	
+
+{% schema %}
+{
+  "name": "customer questions",
+  "settings":[
+    {
+      "type":"text", 
+      "label":"heading for faq",
+      "id":"heading"
+    } 
+  ],
+  "blocks":[
+    {
+      "type":"QA",
+      "name":"Question/Aswer",
+      "settings":[
+          {
+            "type":"text",
+            "label":"title (internal only)",
+            "id":"title"
+          },
+          {
+            "type":"text",
+            "label":"customer questions",
+            "id":"question"
+            },
+            {
+            "type":"richtext",
+            "label":"answer for faq",
+            "id":"answer"
+          }
+      ]
+    },
+    {
+            "type":"headline",
+            "name":"headline",
+            "settings":[
+              {
+                "type":"text",
+                "label":"headline",
+                "id":"title"
+              }
+            ]
+          }
+  ]
+}
+{% endschema %}
+
